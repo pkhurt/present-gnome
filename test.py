@@ -11,7 +11,8 @@ class GnomeTestCase(unittest.TestCase):
         self.in_mem_csv = StringIO("""\
         name1, nameadress1
         name2, nameadress2
-        name3, nameadress3""")  # in python 2.7, put a 'u' before the test string
+        name3, nameadress3
+        name4, nameadress4""")  # in python 2.7, put a 'u' before the test string
         self.test_reader = reader(self.in_mem_csv, delimiter=',', quotechar='|')
 
     def test_read_csv(self):

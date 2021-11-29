@@ -58,11 +58,14 @@ def read_csv(csvfile) -> list:
 def sanity_check_names(name_list) -> bool:
     if len(name_list) == 0:
         return False
+
+    if len(name_list) % 2 != 0:
+        return False
     return True
 
 
 def get_random_letter() -> str:
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    alphabet = "ABCDEFGHIJKLNOPQRSTUVWXYZ"
     enum = random.randint(0, len(alphabet) - 1)
     random_pick = alphabet[enum]
     print(f"THE RANDOM LETTER IS -- {random_pick} --!")
@@ -81,7 +84,9 @@ def send_name_to_mailadress(mail_adress, name, random_letter, sender_email, pass
 
         msg = EmailMessage()
         msg.set_content(f"Wichtelgeschenk: Zufallsbuchstabe ----> {random_letter} \n\n "
-                        f"Du schenkst dieses Jahr {name} etwas mit dem Buchstaben {random_letter}")
+                        f"Du schenkst dieses Jahr -->>{name}<<-- ein tolles Geschenk, das mit dem Buchstaben -->> {random_letter} <<-- beginnt.\n\n"
+                        f"Viele Grüße,\n"
+                        f"Der Weihnachtsmann")
         msg["Subject"] = "Wichtelgeschenk"
         msg["From"] = f"{sender_email}"
         msg["To"] = f"{receiver_email}"
