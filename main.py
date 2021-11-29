@@ -2,11 +2,14 @@ import csv
 import random
 import smtplib, ssl
 from email.message import EmailMessage
-
-
+import yaml
 
 
 def main():
+    # read config
+    with open("config.yaml", "r") as stream:
+        config = yaml.load(stream, Loader=yaml.FullLoader)
+
     # read in name csv
     with open("names.csv") as csvfile:
         name_list = read_csv(csvfile)
@@ -39,7 +42,8 @@ def main():
     password = input("Type your email password and press enter: ")
 
     for pair in new_pairs:
-        send_name_to_mailadress(pair[1], pair[0], random_letter, sender_email, password)
+        send_name_to_mailadress(pair[1], pair[0], random_letter, config["mail"]["ssl_port"],
+                                config["mail"]["smtp_server"], sender_email, password)
 
 
 def read_csv(csvfile) -> list:
@@ -73,12 +77,11 @@ def get_random_letter() -> str:
     return random_pick
 
 
-def send_name_to_mailadress(mail_adress, name, random_letter, sender_email, password) -> None:
-    port = 465  # For SSL
+def send_name_to_mailadress(mail_adress, name, random_letter, ssl_port, smpt_server, sender_email, password) -> None:
     # Create a secure SSL context
     context = ssl.create_default_context()
 
-    with smtplib.SMTP_SSL("smtp.gmail.com", port, context=context) as server:
+    with smtplib.SMTP_SSL(smpt_server, ssl_port, context=context) as server:
         sender_email = sender_email
         receiver_email = mail_adress
 

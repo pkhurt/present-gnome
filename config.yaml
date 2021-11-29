@@ -1,0 +1,3 @@
+mail:
+  smtp_server: smtp.gmail.com
+  ssl_port: 465
