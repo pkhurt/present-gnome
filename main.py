@@ -12,8 +12,6 @@ def main():
         name_list = read_csv(csvfile)
 
     # sanitycheck names
-    # - odd or even
-    # - emails
     if not sanity_check_names(name_list):
         raise IOError("Input not correct. Look in Readme how it should look like.")
 
@@ -72,7 +70,7 @@ def get_random_letter() -> str:
     return random_pick
 
 
-def send_name_to_mailadress(mail_adress, name, random_letter, sender_email, password):
+def send_name_to_mailadress(mail_adress, name, random_letter, sender_email, password) -> None:
     port = 465  # For SSL
     # Create a secure SSL context
     context = ssl.create_default_context()
