@@ -32,11 +32,10 @@ def main():
     password = input("Type your email password and press enter: ")
     
     # loop through list and follow rule: always the current iterator must give present to the next one
-    for idx, name in enumerate(name_list):
-        if idx != len(name_list) - 1:
-            # print(f"{name[1]} has to give {name_list[idx+1][0]} a present with the letter {random_letter}." )
-            send_name_to_mailadress(name[1], name_list[idx+1][0], random_letter, config["mail"]["ssl_port"],
-                                    config["mail"]["smtp_server"], sender_email, password)
+    for idx, name in enumerate(name_list[:-1]):
+        # print(f"{name[1]} has to give {name_list[idx+1][0]} a present with the letter {random_letter}." )
+        send_name_to_mailadress(name[1], name_list[idx+1][0], random_letter, config["mail"]["ssl_port"],
+                                config["mail"]["smtp_server"], sender_email, password)
 
 def read_csv(csvfile) -> list:
     """
