@@ -23,3 +23,11 @@ Name | MailAdress
 Peter | peteriscool@awesome.de | 
 Paul | paulisalsocool@awesome.de |
 
+# For Gmail: How to set up a application specific password
+1. Go to your Google Account.
+2. Select Security.
+3. Under "Signing in to Google," select App Passwords. You may need to sign in. ...
+4. At the bottom, choose Select app and choose the app you using Select device and choose the device you're using. ...
+5. Follow the instructions to enter the App Password. ...
+6. Tap Done.
+
