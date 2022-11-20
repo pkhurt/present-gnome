@@ -67,7 +67,7 @@ def get_random_letter() -> str:
     return random_pick
 
 
-def send_name_to_mailadress(mail_adress, name, random_letter, ssl_port, smpt_server, sender_email, password) -> None:
+def send_name_to_mailadress(mail_adress: str, name: str, random_letter: str, ssl_port: int, smpt_server: str, sender_email: str, password: str) -> None:
     """
     :param mail_adress: Receiver email adress
     :param name: Name that gets the gift from the receiver mail adress
