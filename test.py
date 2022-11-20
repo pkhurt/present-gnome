@@ -3,9 +3,6 @@ import main
 from io import StringIO
 from csv import reader  # this should import your custom parser instead
 
-
-
-
 class GnomeTestCase(unittest.TestCase):
     def setUp(self) -> None:
         self.in_mem_csv = StringIO("""\
@@ -19,7 +16,7 @@ class GnomeTestCase(unittest.TestCase):
         name_list = main.read_csv(self.in_mem_csv)
 
         self.assertTrue(type(name_list) == list)
-        self.assertEqual(len(name_list), 3)
+        self.assertEqual(len(name_list), 4)
 
     def test_sanity_check_names(self):
         name_list = main.read_csv(self.in_mem_csv)

@@ -10,8 +10,8 @@ def main():
     with open("config.yaml", "r") as stream:
         config = yaml.load(stream, Loader=yaml.FullLoader)
 
-    # read in name csv
-    with open("names.csv") as csvfile:
+    # read in name csv from config
+    with open(config["names"]["names_file"]) as csvfile:
         name_list = read_csv(csvfile)
 
     # sanitycheck names
@@ -24,27 +24,19 @@ def main():
     # shuffle names
     random.shuffle(name_list)
 
-    # create pairs of names
-    # swap names and adresses per pair
-    # example:
-    # peter | petersmail
-    # paul | paulsmail
-    # -------->
-    # peter | paulsmail
-    # paul | petersmail
-    new_pairs = []
-    for idx in range(0, len(name_list), 2):
-        new_pairs.append([name_list[idx][0], name_list[idx+1][1]])
-        new_pairs.append([name_list[idx+1][0], name_list[idx][1]])
+    # append list by first entry
+    name_list.append(name_list[0])
 
-    # send email to names
+    # sender host mail information
     sender_email = input("Type your email adress and press enter: ")
     password = input("Type your email password and press enter: ")
-
-    for pair in new_pairs:
-        send_name_to_mailadress(pair[1], pair[0], random_letter, config["mail"]["ssl_port"],
-                                config["mail"]["smtp_server"], sender_email, password)
-
+    
+    # loop through list and follow rule: always the current iterator must give present to the next one
+    for idx, name in enumerate(name_list):
+        if idx != len(name_list) - 1:
+            # print(f"{name[1]} has to give {name_list[idx+1][0]} a present with the letter {random_letter}." )
+            send_name_to_mailadress(name[1], name_list[idx+1][0],config["mail"]["ssl_port"],
+                                    config["mail"]["smtp_server"], sender_email, password)
 
 def read_csv(csvfile) -> list:
     """
@@ -63,8 +55,6 @@ def sanity_check_names(name_list) -> bool:
     if len(name_list) == 0:
         return False
 
-    if len(name_list) % 2 != 0:
-        return False
     return True
 
 
@@ -78,6 +68,11 @@ def get_random_letter() -> str:
 
 
 def send_name_to_mailadress(mail_adress, name, random_letter, ssl_port, smpt_server, sender_email, password) -> None:
+    """
+    :param mail_adress: Receiver email adress
+    :param name: Name that gets the gift from the receiver mail adress
+    :param random_letter: The gift has to start with this letter
+    """
     # Create a secure SSL context
     context = ssl.create_default_context()
 
