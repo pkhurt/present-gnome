@@ -1,3 +1,6 @@
 mail:
   smtp_server: smtp.gmail.com
   ssl_port: 465
+
+names: 
+  names_file: /home/peter/workspace/present-gnome/names.csv

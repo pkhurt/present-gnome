@@ -1,3 +1,8 @@
+<p align="center" widht="100%">
+<img src="./docu/present_gnome_docu.jpeg" alt="logo image" style="width:30%;height:30%;">
+</p>
+<hr>
+
 # present-gnome
 Present gnome (Geschenke-wichtel) is a program that gambles persons into groups to decide who has to give a gift to each other which should start with a random chosen letter.
 
@@ -31,3 +36,7 @@ Paul | paulisalsocool@awesome.de |
 5. Follow the instructions to enter the App Password. ...
 6. Tap Done.
 
+<p align="center" widht="100%">
+<img src="./docu/present_gnome_docu.jpeg" alt="logo image" style="width:30%;height:30%;">
+</p>
+<hr>
