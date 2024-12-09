@@ -82,6 +82,7 @@ def send_name_to_mailadress(mail_adress: str, name: str, random_letter: str, ssl
         msg = EmailMessage()
         msg.set_content(f"Wichtelgeschenk: \n\n "
                         f"Du schenkst dieses Jahr -->>{name}<<-- ein tolles Geschenk, das mit einem beliebigen Buchstaben beginnt.\n\n"
+                        f"Es wird noch eine WhatsApp Gruppe erstellt, in dem du deinen Wunsch / Ideen äußern kannst."
                         f"Viele Grüße,\n"
                         f"Der Weihnachtsmann")
         msg["Subject"] = "Wichtelgeschenk"
