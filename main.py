@@ -18,9 +18,6 @@ def main():
     if not sanity_check_names(name_list):
         raise IOError("Input not correct. Look in Readme how it should look like.")
 
-    # random pick letter
-    random_letter = get_random_letter()
-
     # shuffle names
     random.shuffle(name_list)
 
@@ -33,8 +30,8 @@ def main():
     
     # loop through list and follow rule: always the current iterator must give present to the next one
     for idx, name in enumerate(name_list[:-1]):
-        # print(f"{name[1]} has to give {name_list[idx+1][0]} a present with the letter {random_letter}." )
-        send_name_to_mailadress(name[1], name_list[idx+1][0], random_letter, config["mail"]["ssl_port"],
+        # print(f"{name[1]} has to give {name_list[idx+1][0]} the present {name_list[idx+1][2]} with the letter {random_letter}." )
+        send_name_to_mailadress(name[1], name_list[idx+1][0], name_list[idx+1][2], config["mail"]["ssl_port"],
                                 config["mail"]["smtp_server"], sender_email, password)
 
 def read_csv(csvfile) -> list:
@@ -57,20 +54,10 @@ def sanity_check_names(name_list) -> bool:
     return True
 
 
-def get_random_letter() -> str:
-    alphabet = "ABCDEFGHIJKLNOPQRSTUVWXYZ"
-    enum = random.randint(0, len(alphabet) - 1)
-    random_pick = alphabet[enum]
-    print(f"THE RANDOM LETTER IS -- {random_pick} --!")
-
-    return random_pick
-
-
-def send_name_to_mailadress(mail_adress: str, name: str, random_letter: str, ssl_port: int, smpt_server: str, sender_email: str, password: str) -> None:
+def send_name_to_mailadress(mail_adress: str, name: str, wunsch: str, ssl_port: int, smpt_server: str, sender_email: str, password: str) -> None:
     """
     :param mail_adress: Receiver email adress
     :param name: Name that gets the gift from the receiver mail adress
-    :param random_letter: The gift has to start with this letter
     """
     # Create a secure SSL context
     context = ssl.create_default_context()
@@ -81,8 +68,8 @@ def send_name_to_mailadress(mail_adress: str, name: str, random_letter: str, ssl
 
         msg = EmailMessage()
         msg.set_content(f"Wichtelgeschenk: \n\n "
-                        f"Du schenkst dieses Jahr -->>{name}<<-- ein tolles Geschenk, das mit einem beliebigen Buchstaben beginnt.\n\n"
-                        f"Es wird noch eine WhatsApp Gruppe erstellt, in dem du deinen Wunsch / Ideen äußern kannst."
+                        f"Juhu! Freue dich und frohlocke, denn du erfüllst dieses Jahr -->>{name}<<-- einen ganz besonderen Wunsch.\n\n"
+                        f"Der Wunsch lautet: {wunsch}."
                         f"Viele Grüße,\n"
                         f"Der Weihnachtsmann")
         msg["Subject"] = "Wichtelgeschenk"

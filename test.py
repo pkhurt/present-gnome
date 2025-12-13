@@ -22,9 +22,6 @@ class GnomeTestCase(unittest.TestCase):
         name_list = main.read_csv(self.in_mem_csv)
         self.assertTrue(main.sanity_check_names(name_list))
 
-    def test_get_random_letter(self):
-        self.assertTrue(type(main.get_random_letter()), str)
-
 
 if __name__ == '__main__':
     unittest.main()
